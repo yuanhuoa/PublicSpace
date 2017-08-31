@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>bootstrap弹框</title>
+    <script type="text/javascript" src="../libs/jquery-3.2.1/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../libs/bootstrap-3.3.5/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="../libs/bootstrap-3.3.5/css/bootstrap.min.css">
+    <script type="text/javascript" src="../libs/angular/angular1.6.5.min.js"></script>
+    <style>
+        #dropdown ul li:hover{
+            background-color: #0078D7;
+            cursor: pointer;
+        }
+
+        #dropdown ul li{
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+    </style>
+</head>
+<body ng-app="myApp">
+    <div class="container">
+        <!--模态框-->
+        <h2>使用Bootstrap创建模态框</h2>
+        <div id="example" class="modal fade" tabindex="1" role="dialog" data-backdrop="static">
+            <div class="modal-dialog modal-lg" role="content" style="width: 800px">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <a class="close" data-dismiss="modal">×</a>
+                        <h3>这是一个模态框标题</h3>
+                    </div>
+                    <div class="modal-body">
+                        <h4>模态框中的文本</h4>
+                        <p>你可以在这添加一些文本。</p>
+                        <div ng-include="">angular可以通过ng-include引入页面</div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn btn-default" data-dismiss="modal">OK</a>
+                        <a href="#" class="btn btn-default" data-dismiss="modal">关闭</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p><a data-toggle="modal" href="#example" class="btn btn-primary btn-large">发动演示模态框</a></p>
+        <!--下拉多选框-->
+        <h2>下拉多选框</h2><span>bootstrap.js的clearMenus方法中增加li点击不关闭input|li|textarea</span>
+        <div id="dropdown" class="dropdown" ng-controller="dropdownController">
+            <input type="text" data-toggle="dropdown" readonly style="overflow: hidden">
+            <ul class="dropdown-menu" style="height: 250px;overflow: auto;resize: both;">
+                <li ng-repeat="item in ball" onclick="this.firstElementChild.click()">
+                    <input type="checkbox" ng-model="item.check" ng-click="checked1()"> {{item.name}}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+
+</body>
+</html>
+<script>
+    var aa = angular.module('myApp',[])
+    aa.controller("dropdownController",[
+        '$scope',
+        function ($scope) {
+            'use strict';
+
+            $scope.person=["鲁班","阿珂","皇子","黄忠",'曹操','王昭君','刘备','孙悟空','安其拉','凯','张飞','孙尚香','项羽','扁鹊','庄周','杨戬']
+            $scope.ball = [];
+            for(var i = 0; i < $scope.person.length; i++){
+                var per = {
+                    check: false,
+                    name: $scope.person[i]
+                }
+                $scope.ball.push(per);
+            }
+            $scope.checked1= function () {
+                alert(12);
+            }
+
+
+        }
+    ])
+
+</script>

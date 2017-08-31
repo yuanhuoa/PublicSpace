@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"    
+   "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!--   需引入 cglib.jar
+		当你要使用one to one,many to one 就会碰到N+1的问题。
+		对象之间关联很多有A关联B，B关联C，C关联A这样的关系，如果不是采用延迟加载，很容易一下在出现成千上万对象，造成N+1的问题。
+		
+		lazyLoadingEnabled：true使用延迟加载，false禁用延迟加载。默认为true
+		aggressiveLazyLoading：默认为true
+		   true启用时，当延迟加载开启时访问对象中一个懒对象属性时，将完全加载这个对象的所有懒对象属性。
+		   false，当延迟加载时，按需加载对象属性（即访问对象中一个懒对象属性，不会加载对象中其他的懒对象属性）。
+	 -->
+	<settings>
+		<setting name="lazyLoadingEnabled" value="true" />
+		<setting name="aggressiveLazyLoading" value="true"/>  
+	</settings>
+</configuration>  

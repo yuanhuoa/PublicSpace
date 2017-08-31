@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuan.space.dao.UserDao">
+	<!--设置数据库和实体类中表的字段一一对应！ -->
+	<resultMap id="BaseResultMap" type="com.yuan.space.entity.User">
+		<id column="userid" property="userId" jdbcType="INTEGER" />
+		<result column="username" property="userName" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- 查询单条记录     后面括号里的字段必须和实体类大小写对应    -->
+	<select id="selectUserById" parameterType="int" resultMap="BaseResultMap">
+		SELECT * FROM user WHERE userid = #{userId}
+	</select>
+	
+	<!-- 登录验证 -->
+	<!-- <select id="login" parameterType="com.yuan.space.entity.User"
+		resultMap="UsertMap">
+		select
+		userid,username,password from user where
+		username=#{username}
+		and password=#{password}
+	</select> -->
+	<!-- 增加用户   -->
+	<insert id="addUser" parameterType="com.yuan.space.entity.User">
+		<selectKey keyProperty="userid" resultType="int" order="AFTER">
+			select
+			@@identity
+		</selectKey>
+		insert into user values(null,#{userName},#{password})
+	</insert>
+</mapper>  
